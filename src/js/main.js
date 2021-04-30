@@ -40,8 +40,8 @@ window.addEventListener('DOMContentLoaded', () => {
   feedSlider.init();
 
 
-  const player = new VideoPlayer('.showup .play', '.overlay');
-  player.init();
+  new VideoPlayer('.showup .play', '.overlay');
+  new VideoPlayer('.module__video-item .play', '.overlay').init();
 
   new Difference('.officerold', '.officernew', '.officer__card-item').init();
 
