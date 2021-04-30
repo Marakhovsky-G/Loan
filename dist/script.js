@@ -5091,12 +5091,14 @@ __webpack_require__.r(__webpack_exports__);
 window.addEventListener('DOMContentLoaded', function () {
   var slider = new _modules_slider_slider_main__WEBPACK_IMPORTED_MODULE_0__["default"]({
     container: '.page',
-    btns: '.next'
+    btns: '.next',
+    firsts: '.sidecontrol > a'
   });
   slider.render();
   var modulePageSlider = new _modules_slider_slider_main__WEBPACK_IMPORTED_MODULE_0__["default"]({
     container: '.moduleapp',
-    btns: '.next'
+    btns: '.next',
+    firsts: '.sidecontrol > a'
   });
   modulePageSlider.render();
   var showUpSlider = new _modules_slider_slider_mini__WEBPACK_IMPORTED_MODULE_1__["default"]({
@@ -5123,11 +5125,11 @@ window.addEventListener('DOMContentLoaded', function () {
     activeClass: 'feed__item-active'
   });
   feedSlider.init();
-  new _modules_playVideo__WEBPACK_IMPORTED_MODULE_2__["default"]('.showup .play', '.overlay');
+  new _modules_playVideo__WEBPACK_IMPORTED_MODULE_2__["default"]('.showup__video .play', '.overlay').init();
   new _modules_playVideo__WEBPACK_IMPORTED_MODULE_2__["default"]('.module__video-item .play', '.overlay').init();
   new _modules_difference__WEBPACK_IMPORTED_MODULE_3__["default"]('.officerold', '.officernew', '.officer__card-item').init();
   new _modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"]('https://echo.htmlacademy.ru', '.form').init();
-  new _modules_showInfo__WEBPACK_IMPORTED_MODULE_5__["default"]('.plus__content').init();
+  new _modules_showInfo__WEBPACK_IMPORTED_MODULE_5__["default"]('.module__info-show .plus__content').init();
   new _modules_download__WEBPACK_IMPORTED_MODULE_6__["default"]('.download').init();
 });
 
@@ -5500,9 +5502,6 @@ function () {
   }
 
   _createClass(VideoPlayer, [{
-    key: "play",
-    value: function play() {}
-  }, {
     key: "bindTriggers",
     value: function bindTriggers() {
       var _this = this;
@@ -5718,10 +5717,10 @@ var MainSlider =
 function (_Slider) {
   _inherits(MainSlider, _Slider);
 
-  function MainSlider(btns, next, prev) {
+  function MainSlider(btns, next, prev, firsts) {
     _classCallCheck(this, MainSlider);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(MainSlider).call(this, btns, next, prev));
+    return _possibleConstructorReturn(this, _getPrototypeOf(MainSlider).call(this, btns, next, prev, firsts));
   }
 
   _createClass(MainSlider, [{
@@ -5771,7 +5770,9 @@ function (_Slider) {
         btn.addEventListener('click', function () {
           _this2.plusSlides(1);
         });
-        btn.parentNode.previousElementSibling.addEventListener('click', function (evt) {
+      });
+      this.firsts.forEach(function (first) {
+        first.addEventListener('click', function (evt) {
           evt.preventDefault();
           _this2.slideIndex = 1;
 
@@ -5913,17 +5914,9 @@ function (_Slider) {
     key: "nextSlide",
     value: function nextSlide() {
       if (this.slides[1].tagName == 'BUTTON' && this.slides[2].tagName == 'BUTTON') {
-        this.container.appendChild(this.slides[0]); //slide
-
-        this.container.appendChild(this.slides[1]); //btn
-
-        this.container.appendChild(this.slides[2]); //btn
-
-        this.decorizeSlides();
-      } else if (this.slides[1].tagName == 'BUTTON') {
-        this.container.appendChild(this.slides[0]); //slide
-
-        this.container.appendChild(this.slides[1]); //btn
+        for (var i = 0; i < 3; i++) {
+          this.container.appendChild(this.slides[0]);
+        }
 
         this.decorizeSlides();
       } else {
@@ -6001,6 +5994,8 @@ var Slider = function Slider() {
       next = _ref$next === void 0 ? null : _ref$next,
       _ref$prev = _ref.prev,
       prev = _ref$prev === void 0 ? null : _ref$prev,
+      _ref$firsts = _ref.firsts,
+      firsts = _ref$firsts === void 0 ? null : _ref$firsts,
       _ref$activeClass = _ref.activeClass,
       activeClass = _ref$activeClass === void 0 ? '' : _ref$activeClass,
       animate = _ref.animate,
@@ -6017,6 +6012,7 @@ var Slider = function Slider() {
   this.btns = document.querySelectorAll(btns);
   this.prev = document.querySelector(prev);
   this.next = document.querySelector(next);
+  this.firsts = document.querySelectorAll(firsts);
   this.slideIndex = 1;
   this.activeClass = activeClass;
   this.animate = animate;

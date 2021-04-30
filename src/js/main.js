@@ -8,10 +8,10 @@ import Download from './modules/download';
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  const slider = new MainSlider({container: '.page', btns: '.next'});
+  const slider = new MainSlider({container: '.page', btns: '.next', firsts: '.sidecontrol > a'});
   slider.render();
 
-  const modulePageSlider = new MainSlider({container: '.moduleapp', btns: '.next'});
+  const modulePageSlider = new MainSlider({container: '.moduleapp', btns: '.next', firsts: '.sidecontrol > a'});
   modulePageSlider.render();
 
   const showUpSlider = new MiniSlider({
@@ -42,14 +42,14 @@ window.addEventListener('DOMContentLoaded', () => {
   feedSlider.init();
 
 
-  new VideoPlayer('.showup .play', '.overlay');
+  new VideoPlayer('.showup__video .play', '.overlay').init();
   new VideoPlayer('.module__video-item .play', '.overlay').init();
 
   new Difference('.officerold', '.officernew', '.officer__card-item').init();
 
   new Form('https://echo.htmlacademy.ru', '.form').init();
 
-  new ShowInfo('.plus__content').init();
+  new ShowInfo('.module__info-show .plus__content').init();
 
   new Download('.download').init();
 });

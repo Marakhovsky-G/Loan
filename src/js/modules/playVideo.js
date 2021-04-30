@@ -6,10 +6,6 @@ export default class VideoPlayer {
     this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
   }
 
-  play() {
-
-  }
-
   bindTriggers() {
     this.btns.forEach((btn, i) => {
       try {
