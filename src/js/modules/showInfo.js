@@ -1,5 +1,3 @@
-import { sinh } from "core-js/core/number";
-
 export default class ShowInfo {
   constructor(triggers) {
     this.btns = document.querySelectorAll(triggers);
