@@ -54,6 +54,21 @@ export default class MiniSlider extends Slider {
     });
   }
 
+  autoplaySliders() {
+    const pauseAreas = [this.next, this.prev, this.slides[0].parentNode];
+
+    if (this.autoplay) {
+      let timer = setInterval(() => this.nextSlide(), 1000);
+      pauseAreas.forEach(item => {
+        item.addEventListener('mouseover', () => {
+          clearInterval(timer);
+        });
+        item.addEventListener('mouseleave', () => {
+          timer = setInterval(() => this.nextSlide(), 1000);
+        });
+      });
+    }
+  }
 
   init() {
     try {
@@ -66,10 +81,7 @@ export default class MiniSlider extends Slider {
 
       this.bindTriggers();
       this.decorizeSlides();
-
-      if (this.autoplay) {
-        setInterval(() => this.nextSlide(), 5000);
-      }
+      this.autoplaySliders();
     } catch(err){}
   }
 
